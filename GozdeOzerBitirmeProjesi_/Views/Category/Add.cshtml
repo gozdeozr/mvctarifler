@@ -1,0 +1,64 @@
+﻿@model GozdeOzerBitirmeProjesi_.Entities.Category
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Token"] == null)
+{
+    Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+}
+<h2>Kategori Ekle</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @* Caption Divi *@
+        <div class="form-group">
+            <label for="Name" class="col-sm-2 control-label">Kategori Adı</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Name)
+            </div>
+        </div>
+        @* Description Div i *@
+        <div class="form-group">
+            <label for="Description" class="col-sm-2 control-label">Açıklama</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Description)
+            </div>
+        </div>
+        @* Status Div i *@
+        <div class="form-group">
+            <label for="Status" class="col-sm-2 control-label">Durum</label>
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label class="label label-success">
+                        @Html.CheckBoxFor(x => x.Status)Aktif
+                        @Html.ValidationMessageFor(x => x.Status)
+                    </label>
+                </div>
+            </div>
+        </div>
+        @* Button *@
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+
+            <div id="message" class="col-md-6">
+                @Html.Raw(TempData["Mesaj"])
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+
+
+
+
+

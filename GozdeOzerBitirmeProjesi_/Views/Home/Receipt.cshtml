@@ -1,0 +1,27 @@
+﻿@using GozdeOzerBitirmeProjesi_.Extensions;
+@model IEnumerable<GozdeOzerBitirmeProjesi_.Entities.Blog>
+@{
+    ViewBag.Title = "Receipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:2%">
+    <div class="col-md-6">
+        <h2>Tarifler</h2>
+    </div>
+
+</div>
+
+<hr />
+@foreach (var item in Model.ToList())
+{
+    if (item.Status)
+    {
+        <section class="p-2">
+            <h1>@item.Caption</h1>
+            <span class="small" style="color:gray">@item.Category.Name</span>
+            <p>@item.Detail</p>
+            <div class="text-end">@item.Createdate.ToShortDateString()</div>
+        </section>
+    }
+}

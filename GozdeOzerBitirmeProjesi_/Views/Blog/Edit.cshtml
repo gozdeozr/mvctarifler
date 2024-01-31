@@ -1,0 +1,73 @@
+﻿@model GozdeOzerBitirmeProjesi_.Entities.Blog
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["Token"] == null)
+{
+    Response.RedirectToRoute(new { controller = "Login", action = "Index" });
+}
+<h2>Tarif Düzenle</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        @* Caption Divi *@
+        <div class="form-group">
+            <label for="Name" class="col-sm-2 control-label">Başlık</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Caption, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Caption)
+            </div>
+        </div>
+        @* Detail Div i *@
+        <div class="form-group">
+            <label for="Name" class="col-sm-2 control-label">Detay</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Detail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Detail)
+            </div>
+        </div>
+        @* Keyword Div i *@
+        <div class="form-group">
+            <label for="Name" class="col-sm-2 control-label">Anahtar Kelime</label>
+            <div class="col-sm-10">
+                @Html.TextBoxFor(x => x.Keyword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Keyword)
+            </div>
+        </div>
+        @* Categories Div i *@
+        <div class="form-group">
+            <label for="Name" class="col-sm-2 control-label">Kategori Adı</label>
+            <div class="col-sm-10">
+                @Html.DropDownListFor(x => x.CategoryId, ViewData["CategoryId"] as SelectList, "Seçiniz", new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Keyword)
+            </div>
+        </div>
+        @* Status Div i *@
+        <div class="form-group">
+            @Html.LabelFor(x => x.Status, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label class="label label-success">
+                        @Html.CheckBoxFor(x => x.Status)Aktif
+                        @Html.ValidationMessageFor(x => x.Status)
+                    </label>
+                </div>
+            </div>
+        </div>
+        @* Button *@
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+
+            <div id="message" class="col-md-6">
+                @Html.Raw(TempData["Mesaj"])
+            </div>
+        </div>
+
+    </div>
+}
+

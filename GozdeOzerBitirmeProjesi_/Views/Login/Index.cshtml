@@ -1,0 +1,73 @@
+﻿@using System.Web.Optimization;
+@model GozdeOzerBitirmeProjesi_.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    @Styles.Render("~/style/custom")
+    @Styles.Render("~/style/bootstrap")
+    @Scripts.Render("~/script/modernizr")
+    <script>
+    function redirectToIndex() {
+        // JavaScript ile sayfa yönlendirme işlemi
+        window.location.href = '@Url.Action("Index", "Home")';
+    }
+    </script>
+</head>
+<body class="login-body">
+    <div>
+        <button class="btn btn-primary" onclick="redirectToIndex()">Ana Sayfa</button>
+    </div>
+    <div class="loginPage">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                <label for="Name" class="control-label">Kullanıcı Adı</label>
+                @Html.TextBoxFor(x => x.Username, new { @class = "form-control", placeholder = "Kullanıcı Adı veya E-Mail" })
+                @Html.ValidationMessageFor(x => x.Username)
+
+            </div>
+            <div class="form-group">
+                <label for="Name" class="control-label">Parola</label>
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Parola" })
+                @Html.ValidationMessageFor(x => x.Password)
+
+            </div>
+            <div class="checkbox">
+                @Html.CheckBoxFor(x => x.Showpassword, new { @onclick = "myFunction()" }) Şifreyi Göster
+            </div>
+            @Html.Raw(ViewBag.Mesaj)
+            <button type="submit" class="btn btn-danger"> Giriş Yap </button>
+
+
+        }
+
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("Password");
+            if (x.type == "password") {
+                x.type = "text";
+            }
+            else {
+
+                x.type = "password";
+            }
+
+        }
+    </script>
+
+    <link rel="stylesheet" href="~/Scripts/jquery-3.7.1.js" />
+    <link rel="stylesheet" href="~/Scripts/bootstrap.js" />
+    <link rel="stylesheet" href="~/Scripts/jquery.validate.js" />
+    <link rel="stylesheet" href="~/Scripts/jquery.validate.unobtrusive.js" />
+</body>
+</html>
